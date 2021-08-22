@@ -1,0 +1,15 @@
+<html>
+    <body>
+
+        <pre id='output'></pre>
+
+        <script type='text/javascript'>
+            let ws = new WebSocket("ws://localhost:3000");
+            ws.onmessage = function(msg) {
+                document.getElementById('output').innerHTML += msg.data;
+            }
+        </script>
+
+    </body>
+
+</html>
