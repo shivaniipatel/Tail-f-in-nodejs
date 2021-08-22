@@ -3,10 +3,9 @@ Tail -f like functionality in Nodjes
 
 ---
 Client 
-- used live-server extension in vs-code 
+- Used live-server extension in vs-code 
+- To run client, just use go-live button on vs-code and open localhost:<port> to watch the logs
 
 
 Server 
-- used http for server 
-- websocket module for websocket 
-- FS module for reading and watching the file
+- Run server.js using command `node server.js`
