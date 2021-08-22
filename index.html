@@ -4,7 +4,7 @@
         <pre id='output'></pre>
 
         <script type='text/javascript'>
-            let ws = new WebSocket("ws://localhost:3000");
+            let ws = new WebSocket(`ws://localhost:3000?fileName=${window.location.search.substr(1).split('&').map(obj=> obj.split('=')).find(obj => obj[0]=='fileName')[1]}`);
             ws.onmessage = function(msg) {
                 document.getElementById('output').innerHTML += msg.data;
             }

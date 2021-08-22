@@ -4,7 +4,7 @@ const fs = require('fs');
 
 class LogsServices {
 
-    static watchLog(fileName, connections) {
+    static watchLog(fileName) {
         
         /**The server should push updates to the clients as we have to be as real time as possible. */
         fs.watchFile(fileName, (curr, prev) => {
@@ -20,8 +20,9 @@ class LogsServices {
                         if (err) {
                             console.error(err);
                         } else {
-                            connections.forEach(conn => {
-                                conn.sendUTF(buffer.toString());
+                            let msgToSend = buffer.toString();
+                            connections[fileName].forEach(conn => {
+                                conn.sendUTF(msgToSend);
                             });
                         }
                     });
