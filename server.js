@@ -4,7 +4,7 @@ const http = require('http');
 const fs = require('fs');
 const server = http.createServer((req, res) => {});
 const websocket = new WebSocketServer({httpServer: server});
-const {watchLog, getLastFewLines} = require('./watchLog');
+const LogsServices = require('./watchLog');
 const fileName = 'logfile';
 
 
@@ -15,7 +15,7 @@ websocket.on('request', async (request) => {
     connections.push(connection);
     
     /**SEND LAST FEW LINES */
-    let lastFewLines = await getLastFewLines(1096, fileName);
+    let lastFewLines = await LogsServices.getLastFewLines(1096, fileName);
     connection.sendUTF(lastFewLines);
 
     connection.on('message', (msg) => {
@@ -33,7 +33,7 @@ websocket.on('request', async (request) => {
 });
 
 /**Watch log file for updates and send when there is an addition */
-watchLog(fileName, connections);
+LogsServices.watchLog(fileName, connections);
 
 
 server.listen(3000, () => console.log('Express Server Listenning on Port 3000'));
